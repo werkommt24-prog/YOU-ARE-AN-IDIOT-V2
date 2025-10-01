@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>You Are An Idiot!</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      animation: flicker 0.2s infinite; /* Bildschirm flackert */
+    }
+
+    h1 {
+      font-size: 60px;
+      animation: flash 1s infinite, bounce 2s infinite;
+      text-align: center;
+    }
+
+    @keyframes flicker {
+      0%, 100% { background-color: black; }
+      50% { background-color: white; color: black; }
+    }
+
+    @keyframes flash {
+      0%   { color: white; }
+      50%  { color: red; }
+      100% { color: white; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-20px); }
+    }
+  </style>
+</head>
+<body>
+  <h1>YOU ARE AN IDIOT ☻☻☻</h1>
+
+  <!-- Audio: startet nach Klick -->
+  <audio id="idiotAudio" loop>
+    <source src="https://files.catbox.moe/pnlmyb.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    let started = false;
+
+    // Start nach Klick
+    document.body.addEventListener("click", () => {
+      if (!started) {
+        const audio = document.getElementById("idiotAudio");
+        audio.play();
+        started = true;
+
+        // Alle 5 Sekunden ein neues Popup
+        setInterval(() => {
+          const newWin = window.open(window.location.href, "_blank", "width=400,height=200");
+          if (newWin) {
+            // Popup hüpfen lassen
+            let pos = 0;
+            let dir = 1;
+            setInterval(() => {
+              if (newWin.closed) return;
+              pos += dir * 10;
+              if (pos > 100 || pos < 0) dir *= -1;
+              try {
+                newWin.moveBy(10 * dir, 10 * dir);
+              } catch(e) {}
+            }, 200);
+          }
+        }, 5000);
+      }
+    });
+  </script>
+</body>
+</html>
